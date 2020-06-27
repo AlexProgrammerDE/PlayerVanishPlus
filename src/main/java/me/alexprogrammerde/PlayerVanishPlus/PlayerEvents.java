@@ -1,5 +1,6 @@
 package me.alexprogrammerde.PlayerVanishPlus;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,6 +28,12 @@ public class PlayerEvents implements Listener {
 
         if (Main.getPlugin(Main.class).isVanished(player)) {
             event.setQuitMessage("");
+        }
+
+        if (Main.getPlugin(Main.class).isScheduled(player)) {
+            Bukkit.getScheduler().cancelTask(Main.getPlugin(Main.class).getTaskID(player));
+
+            Main.getPlugin(Main.class).removeScheduledPlayer(player);
         }
     }
 }

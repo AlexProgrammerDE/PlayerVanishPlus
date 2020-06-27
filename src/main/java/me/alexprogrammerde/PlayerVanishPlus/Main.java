@@ -66,6 +66,7 @@ public class Main extends JavaPlugin {
         console.sendMessage(prefix + "Loading metrics");
         int pluginId = 7976;
         Metrics metrics = new Metrics(this, pluginId);
+
     }
 
     public GameMode getGamemode(Player player) {
@@ -92,6 +93,28 @@ public class Main extends JavaPlugin {
 
     public HashMap<Player, GameMode> getGamemodeList() {
         return gamemodelist;
+    }
+
+    public void putTaskID(Player player, Integer integer) {
+        taskidlist.put(player, integer);
+    }
+
+    public Integer getTaskID(Player player) {
+        Integer integer = taskidlist.get(player);
+
+        return integer;
+    }
+
+    public void removeScheduledPlayer(Player player) {
+        taskidlist.remove(player, getGamemode(player));
+    }
+
+    public boolean isScheduled(Player player) {
+        return taskidlist.containsKey(player);
+    }
+
+    public HashMap<Player, Integer> getTaskIDlist() {
+        return taskidlist;
     }
 
     public FileConfiguration getFileConfig() {

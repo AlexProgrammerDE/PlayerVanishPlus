@@ -2,8 +2,10 @@ package me.alexprogrammerde.PlayerVanishPlus.commands;
 
 import me.alexprogrammerde.PlayerVanishPlus.Main;
 import me.alexprogrammerde.PlayerVanishPlus.VanishPlayer;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +33,8 @@ public class VanishCommand implements CommandExecutor {
 
                         Bukkit.broadcastMessage(config.getString("joinmessage").replaceAll("%playername%", player.getDisplayName()));
 
+                        Bukkit.getScheduler().cancelTask(Main.getPlugin(Main.class).getTaskID(player));
+
                         player.sendMessage("You are now unvanished!");
                     } else {
                         sender.sendMessage("You are not vanished!");
@@ -51,6 +55,15 @@ public class VanishCommand implements CommandExecutor {
 
                     Bukkit.broadcastMessage(config.getString("quitmessage").replaceAll("%playername%", player.getDisplayName()));
 
+                    Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+                        @Override
+                        public void run() {
+                            TextComponent actionbar = new TextComponent("You are vanished at the moment!");
+                            actionbar.setColor(ChatColor.GOLD);
+
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, actionbar);
+                        }
+                    }, 20, 20);
                     player.sendMessage("You are now vanished!");
                 } else {
                     sender.sendMessage("You have no permission to do that!");
