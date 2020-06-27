@@ -5,9 +5,6 @@ author: AlexProgrammerDE
 description: A simple vanishing plugin.
 commands:
   vanish:
-  unvanish:
 permissions:
   playervanishplus.vanish:
-    description: Allows you to vanish
-  playervanishplus.unvanish:
-    description: Allows you to unvanish
+    description: Allows you to vanish and unvanish

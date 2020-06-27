@@ -24,21 +24,17 @@ public class VanishCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (Main.getPlugin(Main.class).isVanished(player)) {
-                if (player.hasPermission("playervanishplus.unvanish")) {
+                if (player.hasPermission("playervanishplus.vanish")) {
                     VanishPlayer.unvanishPlayer(player);
 
-                    if (Main.getPlugin(Main.class).isVanished(player)) {
-                        player.setGameMode(Main.getPlugin(Main.class).getGamemode(player));
-                        Main.getPlugin(Main.class).removePlayer(player);
+                    player.setGameMode(Main.getPlugin(Main.class).getGamemode(player));
+                    Main.getPlugin(Main.class).removePlayer(player);
 
-                        Bukkit.broadcastMessage(config.getString("joinmessage").replaceAll("%playername%", player.getDisplayName()));
+                    Bukkit.broadcastMessage(config.getString("joinmessage").replaceAll("%playername%", player.getDisplayName()));
 
-                        Bukkit.getScheduler().cancelTask(Main.getPlugin(Main.class).getTaskID(player));
+                    Bukkit.getScheduler().cancelTask(Main.getPlugin(Main.class).getTaskID(player));
 
-                        player.sendMessage("You are now unvanished!");
-                    } else {
-                        sender.sendMessage("You are not vanished!");
-                    }
+                    player.sendMessage("You are now unvanished!");
                 } else {
                     sender.sendMessage("You have no permission to do that!");
                 }
@@ -55,7 +51,7 @@ public class VanishCommand implements CommandExecutor {
 
                     Bukkit.broadcastMessage(config.getString("quitmessage").replaceAll("%playername%", player.getDisplayName()));
 
-                    Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
+                    int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
                         @Override
                         public void run() {
                             TextComponent actionbar = new TextComponent("You are vanished at the moment!");
@@ -64,6 +60,9 @@ public class VanishCommand implements CommandExecutor {
                             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, actionbar);
                         }
                     }, 20, 20);
+
+                    Main.getPlugin(Main.class).putTaskID(player, taskID);
+
                     player.sendMessage("You are now vanished!");
                 } else {
                     sender.sendMessage("You have no permission to do that!");
