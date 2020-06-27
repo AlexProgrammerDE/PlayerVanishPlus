@@ -12,6 +12,10 @@ public class PlayerEvents implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
+        if (Main.getPlugin(Main.class).isVanished(player)) {
+            event.setJoinMessage("");
+        }
+
         for (Player vanishedplayer : Main.getPlugin(Main.class).getGamemodeList().keySet()) {
             player.hidePlayer(Main.getPlugin(Main.class), vanishedplayer);
         }
@@ -21,8 +25,8 @@ public class PlayerEvents implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (Main.getPlugin(Main.class).isVanished(player) && Main.getPlugin(Main.class).getFileConfig().getBoolean("unvanish-on-leave")) {
-            Main.getPlugin(Main.class).removePlayer(player);
+        if (Main.getPlugin(Main.class).isVanished(player)) {
+            event.setQuitMessage("");
         }
     }
 }

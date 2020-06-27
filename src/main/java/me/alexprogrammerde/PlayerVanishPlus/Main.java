@@ -1,6 +1,5 @@
 package me.alexprogrammerde.PlayerVanishPlus;
 
-import me.alexprogrammerde.PlayerVanishPlus.commands.UnVanishCommand;
 import me.alexprogrammerde.PlayerVanishPlus.commands.VanishCommand;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
@@ -54,7 +53,6 @@ public class Main extends JavaPlugin {
 
         console.sendMessage(prefix + "Registering commands");
         Main.getPlugin(Main.class).getServer().getPluginCommand("vanish").setExecutor(new VanishCommand());
-        Main.getPlugin(Main.class).getServer().getPluginCommand("unvanish").setExecutor(new UnVanishCommand());
 
         console.sendMessage(prefix + "Checking for a newer version.");
         new UpdateChecker(this, 80567).getVersion(version -> {
