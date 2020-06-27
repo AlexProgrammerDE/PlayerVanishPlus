@@ -1,0 +1,13 @@
+name: PlayerVanishPlus
+version: 1.0.0
+main: me.alexprogrammerde.PlayerVanishPlus.Main
+author: AlexProgrammerDE
+description: A simple vanishing plugin.
+commands:
+  vanish:
+  unvanish:
+permissions:
+  playervanishplus.vanish:
+    description: Allows you to vanish
+  playervanishplus.unvanish:
+    description: Allows you to unvanish
