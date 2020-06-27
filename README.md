@@ -1,2 +1,2 @@
-# BungeeStatus
-A plugin for editing the playercount tooltip.
+# PlayerVanishPlus
+Another good vanish plugin for spigot.
