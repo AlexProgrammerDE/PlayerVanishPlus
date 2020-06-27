@@ -55,11 +55,11 @@ public class Main extends JavaPlugin {
         Main.getPlugin(Main.class).getServer().getPluginCommand("vanish").setExecutor(new VanishCommand());
 
         console.sendMessage(prefix + "Checking for a newer version.");
-        new UpdateChecker(this, 80567).getVersion(version -> {
+        new UpdateChecker(this, 80763).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 console.sendMessage(prefix + "Your up to date!");
             } else {
-                console.sendMessage(prefix + "There is a new update available. Download it at: https://www.spigotmc.org/resources/bungeeping.80567/history (You may need to remove the old config to get a never one.)");
+                console.sendMessage(prefix + "There is a new update available. Download it at: https://www.spigotmc.org/resources/playervanishplus.80763/updates (You may need to remove the old config to get a never one.)");
             }
         });
 
